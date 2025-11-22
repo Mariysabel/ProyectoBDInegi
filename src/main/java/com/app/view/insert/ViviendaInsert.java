@@ -7,11 +7,13 @@ package com.app.view.insert;
 import java.awt.*;
 import javax.swing.*;
 
-/**
+/*
+
  *
- * @author Factor
+ * @author Mariysabel
  */
-public class ViviendaInsert extends JPanel{
+public class ViviendaInsert extends JPanel {
+
     private JTextField txtEntidad;
     private JTextField txtMun;
     private JTextField txtLoc;
@@ -44,7 +46,7 @@ public class ViviendaInsert extends JPanel{
         int fila = 0;
 
         // MÉTODO PARA AGREGAR ETIQUETA + TEXTO
-        addField("ENTIDAD:", txtEntidad = new JTextField(), gbc, fila++); 
+        addField("ENTIDAD:", txtEntidad = new JTextField(), gbc, fila++);
         addField("MUN:", txtMun = new JTextField(), gbc, fila++);
         addField("LOC:", txtLoc = new JTextField(), gbc, fila++);
         addField("VIVTOT:", txtVivTot = new JTextField(), gbc, fila++);
@@ -80,19 +82,72 @@ public class ViviendaInsert extends JPanel{
         add(field, gbc);
     }
 
-    // ------- Getters para obtener los datos desde el controlador -------
-    public JTextField getTxtEntidad() { return txtEntidad; }
-    public JTextField getTxtMun() { return txtMun; }
-    public JTextField getTxtLoc() { return txtLoc; }
-    public JTextField getTxtVivTot() { return txtVivTot; }
-    public JTextField getTxtTvivHab() { return txtTvivHab; }
-    public JTextField getTxtTvivPar() { return txtTvivPar; }
-    public JTextField getTxtVivparHab() { return txtVivparHab; }
-    public JTextField getTxtVivparhCv() { return txtVivparhCv; }
-    public JTextField getTxtTvivparHab() { return txtTvivparHab; }
-    public JTextField getTxtVivparDes() { return txtVivparDes; }
-    public JTextField getTxtVivparUt() { return txtVivparUt; }
-    public JTextField getTxtOcupVivPar() { return txtOcupVivPar; }
+    public void limpiar() {
+        getTxtEntidad().setText("");
+        getTxtMun().setText("");
+        getTxtLoc().setText("");
 
-    public JButton getBtnGuardar() { return btnGuardar; }
+        getTxtVivTot().setText("");
+        getTxtTvivHab().setText("");
+        getTxtTvivPar().setText("");
+
+        getTxtVivparHab().setText("");
+        getTxtVivparhCv().setText("");
+        getTxtTvivparHab().setText("");
+        getTxtVivparDes().setText("");
+        getTxtVivparUt().setText("");
+        getTxtOcupVivPar().setText("");
+    }
+
+    public JTextField getTxtEntidad() {
+        return txtEntidad;
+    }
+
+    public JTextField getTxtMun() {
+        return txtMun;
+    }
+
+    public JTextField getTxtLoc() {
+        return txtLoc;
+    }
+
+    public JTextField getTxtVivTot() {
+        return txtVivTot;
+    }
+
+    public JTextField getTxtTvivHab() {
+        return txtTvivHab;
+    }
+
+    public JTextField getTxtTvivPar() {
+        return txtTvivPar;
+    }
+
+    public JTextField getTxtVivparHab() {
+        return txtVivparHab;
+    }
+
+    public JTextField getTxtVivparhCv() {
+        return txtVivparhCv;
+    }
+
+    public JTextField getTxtTvivparHab() {
+        return txtTvivparHab;
+    }
+
+    public JTextField getTxtVivparDes() {
+        return txtVivparDes;
+    }
+
+    public JTextField getTxtVivparUt() {
+        return txtVivparUt;
+    }
+
+    public JTextField getTxtOcupVivPar() {
+        return txtOcupVivPar;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
 }

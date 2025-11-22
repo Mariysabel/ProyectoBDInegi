@@ -8,11 +8,13 @@ import com.app.view.*;
 import com.app.view.insert.*;
 import com.app.model.*;
 import com.app.model.DAO.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 /**
  *
- * @author Factor
+ * @author Mariysabel
  */
 public class ViviendaController {
 
@@ -22,9 +24,10 @@ public class ViviendaController {
     private ViviendaDAO dao;
     private JTabbedPane tabs;
 
-    public ViviendaController(ViviendaView view, JTabbedPane tabs) {
+    public ViviendaController(ViviendaView view, JTabbedPane tabs, ViviendaDAO dao) {
         this.view = view;
-        this.tabs=tabs;
+        this.tabs = tabs;
+        this.dao=dao;
         this.viviendaInsert = new ViviendaInsert();
         this.view.btnAdd.addActionListener(e -> abrirFromRegistro());
         this.viviendaInsert.btnGuardar.addActionListener(e -> registroVivienda());
@@ -34,9 +37,36 @@ public class ViviendaController {
         tabs.add("REGISTRO VIVIENDA", viviendaInsert);
         tabs.setSelectedIndex(tabs.indexOfTab("REGISTRO VIVIENDA"));
     }
+
+    private void registroVivienda() {
+        Vivienda vivi = new Vivienda(Integer.parseInt(viviendaInsert.getTxtEntidad().getText()),
+                Integer.parseInt(viviendaInsert.getTxtMun().getText()),
+                Integer.parseInt(viviendaInsert.getTxtLoc().getText()),
+                Integer.parseInt(viviendaInsert.getTxtVivTot().getText()),
+                Integer.parseInt(viviendaInsert.getTxtTvivHab().getText()),
+                Integer.parseInt(viviendaInsert.getTxtTvivPar().getText()),
+                viviendaInsert.getTxtVivparHab().getText(),
+                viviendaInsert.getTxtVivparhCv().getText(),
+                viviendaInsert.getTxtTvivparHab().getText(),
+                viviendaInsert.getTxtVivparDes().getText(),
+                viviendaInsert.getTxtVivparUt().getText(),
+                viviendaInsert.getTxtOcupVivPar().getText());
+        boolean flag = dao.guardar(vivi);
+        if (flag) {
+            JOptionPane.showMessageDialog(null,
+                    "SI SE PUDO");
+                    view.cargarTabla(listar());
+                    tabs.setSelectedIndex(tabs.indexOfTab("Vivienda"));
+                    tabs.remove(viviendaInsert);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "NO SE PUDO :c");
+                    viviendaInsert.limpiar();
+        }
+    }
     
-    private void registroVivienda(){
-        System.out.println("SE REGISTRA UNA VIVIENDA");
+    public List<Vivienda> listar() {
+        return dao.getAll();
     }
 
 }
