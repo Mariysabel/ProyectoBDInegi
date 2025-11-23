@@ -5,11 +5,18 @@ import java.awt.*;
 import java.util.List;
 import com.app.model.Vivienda;
 
+/**
+ *
+ * @author Mariysabel
+ */
 public class ViviendaView extends JPanel {
 
-    public static JButton btnAdd;
-    private JTable tablaVivienda;            
-    private JScrollPane scrollTabla;         
+    public JButton btnAdd;
+    public JButton btnActualizar;
+    public JButton btnEliminar;
+    public JTable tablaVivienda;
+    private JScrollPane scrollTabla;
+    public buscadorId buscador;
 
     public ViviendaView() {
         initComponents();
@@ -18,26 +25,53 @@ public class ViviendaView extends JPanel {
     private void initComponents() {
         setLayout(new BorderLayout());
 
-        // ----------- HEADER -----------
-        FlowLayout fl = new FlowLayout(FlowLayout.RIGHT, 10, 10);
+        // buscador
+        FlowLayout fl = new FlowLayout(FlowLayout.LEFT, 10, 10);
         JPanel header = new JPanel(fl);
-
-        btnAdd = new JButton("AÑADIR");
-        header.add(btnAdd);
-
+        buscador = new buscadorId("vivienda");
+        header.add(buscador);
         add(header, BorderLayout.NORTH);
 
-        // ----------- TABLA -----------
+        // tabla
         tablaVivienda = new JTable();
+        setPropiedadesTabla();
+
         scrollTabla = new JScrollPane(tablaVivienda);
-        
-   
+        scrollTabla.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(scrollTabla, BorderLayout.CENTER);
+
+        // menú lateral
+        JPanel panelLateral = new JPanel();
+        panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
+        panelLateral.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // opcional
+
+        btnActualizar = new JButton("ACTUALIZAR");
+        btnEliminar = new JButton("ELIMINAR");
+        btnAdd = new JButton("AÑADIR");
+
+        Dimension d = new Dimension(140, 25);
+        btnAdd.setPreferredSize(d);
+        btnAdd.setMaximumSize(d);
+        btnActualizar.setPreferredSize(d);
+        btnActualizar.setMaximumSize(d);
+        btnEliminar.setPreferredSize(d);
+        btnEliminar.setMaximumSize(d);
+
+        panelLateral.add(btnAdd);
+        panelLateral.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelLateral.add(btnActualizar);
+        panelLateral.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelLateral.add(btnEliminar);
+        add(panelLateral, BorderLayout.EAST);
+
     }
 
-    // ----------- MÉTODO PARA CARGAR TABLA -----------
     public void cargarTabla(List<Vivienda> lista) {
-
+        if (lista.isEmpty()){
+            JOptionPane.showMessageDialog(null,
+                "NO EXISTEN REGISTROS CON ESAS CARACTERÍSTICAS", "Sin registros", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         String[] columnas = {
             "ENTIDAD", "MUN", "LOC", "VIVTOT", "TVIVHAB", "TVIVPAR",
             "VIVPAR_HAB", "VIVPARH_CV", "TVIVPARHAB", "VIVPAR_DES",
@@ -64,5 +98,15 @@ public class ViviendaView extends JPanel {
         }
 
         tablaVivienda.setModel(modelo);
+        setPropiedadesTabla();
     }
+
+    private void setPropiedadesTabla(){
+        tablaVivienda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaVivienda.setDefaultEditor(Object.class, null);
+        tablaVivienda.setCellSelectionEnabled(false);
+        tablaVivienda.getTableHeader().setReorderingAllowed(false);
+        tablaVivienda.setRowSelectionAllowed(true);
+    }
+
 }

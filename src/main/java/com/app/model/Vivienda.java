@@ -25,10 +25,8 @@ public class Vivienda {
     private String VIVPAR_UT;
     private String OCUPVIVPAR;
 
-    // ----- Constructor vacío -----
     public Vivienda() {}
 
-    // ----- Constructor completo -----
     public Vivienda(int ENTIDAD, int MUN, int LOC, int VIVTOT, int TVIVHAB, int TVIVPAR,
                     String VIVPAR_HAB, String VIVPARH_CV, String TVIVPARHAB,
                     String VIVPAR_DES, String VIVPAR_UT, String OCUPVIVPAR) {
@@ -46,8 +44,6 @@ public class Vivienda {
         this.VIVPAR_UT = VIVPAR_UT;
         this.OCUPVIVPAR = OCUPVIVPAR;
     }
-
-    // ----- Getters y Setters -----
 
     public int getENTIDAD() { return ENTIDAD; }
     public void setENTIDAD(short ENTIDAD) { this.ENTIDAD = ENTIDAD; }
